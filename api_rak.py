@@ -10,6 +10,8 @@ import requests
 import uuid
 import base64
 
+from pipeline import prediction , text_processing
+
 login = 'RGFuVXNlcg=='
 mdp = 'bXlwdw=='
 
@@ -114,6 +116,10 @@ def get_current_user(credentials: HTTPBasicCredentials = Depends(security)):
 def current_user(username: str = Depends(get_current_user)):
     return "Hello {}".format(username)
 
+@app.get("/predict")
+def predict(designation : str, description : str,username: str = Depends(get_current_user)):
+    pred = prediction(text_processing(designation, description))
+    return pred
 
 
 class Object(BaseModel):

@@ -3,10 +3,11 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
 import numpy as np
 
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Input
 
 
@@ -94,17 +95,18 @@ def text_processing(title,desc):
     X = vectorizer.transform([text]).todense()
     return X
 
-#title = "Super jouet de folie"
-#desc = "une figurine qui fera rever les enfants"
 
 def prediction(X):
-    model = joblib.load('Rakuten_model.sav')
-    proba = np.max(model.predict(X)) 
+    model = load_model('Rakuten_model')
+    prob = np.max(model.predict(X)) 
     pred_class = np.argmax(model.predict(X), axis=-1) 
     le = joblib.load("Rakuten_LabelEncoder.sav")
     classe = le.inverse_transform(pred_class)
-    return (classe, proba)
+    return (classe, prob)
 
-# X = prediction(text_processing(title,desc))
-# print(X[0])
-# print(round(X[1]*100))
+title = "Super jouet de folie"
+desc = "une figurine qui fera rever les enfants"
+
+X = prediction(text_processing(title,desc))
+print(X[0])
+print(round(X[1]*100), "%")

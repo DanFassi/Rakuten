@@ -9,6 +9,7 @@ from pymongo import MongoClient
 import requests
 import uuid
 import base64
+import datetime
 
 from pipeline import prediction , text_processing
 
@@ -19,6 +20,7 @@ mdp = 'bXlwdw=='
 ATLAS_URI="mongodb+srv://{login}:{pw}@clusterdan.lpuyh34.mongodb.net/test".format(login= base64.b64decode(login).decode("utf-8") , pw = base64.b64decode(mdp).decode("utf-8"))
 DB_NAME="RAKUTEN_logs"
 collection = "my_collection"
+logs = "logs"
 
 #instanciation de l'API
 app = FastAPI(title = "API MongoDB", description = "API permettant d'effectuer des requetes")
@@ -117,12 +119,38 @@ def current_user(username: str = Depends(get_current_user)):
     return "Hello {}".format(username)
 
 @app.get("/predict")
-def predict(designation : str, description : str,username: str = Depends(get_current_user)):
+def predict(designation : str, description : str,request: Request, username: str = Depends(get_current_user)):
     pred = prediction(text_processing(designation, description))
-    return pred
+    log =  {"date": datetime.datetime.now(),
+            "user" : username,
+            "designation" : designation,
+            "description" : description,
+            "prediction" : pred[0],
+            "validation" : "no"
+            }   
+    new_log = request.app.database[logs].insert_one(log)
+    created_log = request.app.database[logs].find_one(
+        {"_id": new_log.inserted_id}
+    )
+    app.state.log_id = created_log["_id"]
+    return {"prediction" :pred[0], "probabilité" : pred[1]}
 
 
-class Object(BaseModel):
-    column1: str
-    column2 : str
+@app.put("/", response_description="mise à jour du dernier log entré")
+def update_user(request: Request):
+    log_id = app.state.log_id
+    if log_id is not None:
+        update_result = request.app.database[logs].update_one(
+            {"_id": log_id}, {"validation" : "yes"}
+        )
+
+        if update_result.modified_count == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"log with log_id {log_id} not found 1")
+
+    if (
+        existing_log := request.app.database[logs].find_one({"_id": log_id})
+    ) is not None:
+        return existing_log
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"log with log_id {log_id} not found 2")
 

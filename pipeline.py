@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Input
 
-
 # =============================================================================
 # fonctions utilisés pour le processing d'un dataframe:
 # =============================================================================
@@ -99,9 +98,9 @@ def text_processing(title,desc):
 def prediction(X):
     model = load_model('Rakuten_model')
     prob = np.max(model.predict(X)) 
-    pred_class = np.argmax(model.predict(X), axis=-1) 
+    pred_class = np.argmax(model.predict(X), axis=-1)
     le = joblib.load("Rakuten_LabelEncoder.sav")
-    classe = le.inverse_transform(pred_class)
+    classe = str(le.inverse_transform(pred_class)[0])
     return (classe, prob)
 
 title = "Super jouet de folie"

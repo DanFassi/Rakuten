@@ -101,11 +101,11 @@ def prediction(X):
     pred_class = np.argmax(model.predict(X), axis=-1)
     le = joblib.load("Rakuten_LabelEncoder.sav")
     classe = str(le.inverse_transform(pred_class)[0])
-    return (classe, prob)
+    return {"PrductCODE" : classe, "predict_proba": prob}
 
-title = "Super jouet de folie"
-desc = "une figurine qui fera rever les enfants"
+#title = "Super jouet de folie"
+#desc = "une figurine qui fera rever les enfants"
 
-X = prediction(text_processing(title,desc))
-print(X[0])
-print(round(X[1]*100), "%")
+#X = prediction(text_processing(title,desc))
+#print(X[0])
+#print(round(X[1]*100), "%")

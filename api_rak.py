@@ -47,6 +47,12 @@ class User(BaseModel):
 
 router = APIRouter()
 
+
+# =============================================================================
+# Fonctions API liées à la gestion de l'identification et de l'authentification
+# =============================================================================
+
+
 #requete permettant d'ajouter un nouvel utilisateur ainsi que son mot de passe dans la base
 @router.post("/", response_description="Creation d'un nouvel utilisateur", status_code=status.HTTP_201_CREATED, response_model=User)
 def create_user(request: Request, user: User = Body(...)):
@@ -114,10 +120,18 @@ def get_current_user(credentials: HTTPBasicCredentials = Depends(security)):
         )
     return credentials.username
 
+
+# =============================================================================
+# Fonctions API liées à l'interface
+# =============================================================================
+
+
 @app.get("/login")
 def current_user(username: str = Depends(get_current_user)):
     return "Hello {}".format(username)
 
+
+#requete retournant une prediction en fonction des informations fournit par l'utilisateur, et stock les résultats dans la base logs
 @app.get("/predict")
 def predict(designation : str, description : str,request: Request, username: str = Depends(get_current_user)):
     pred = prediction(text_processing(designation, description))
@@ -125,7 +139,7 @@ def predict(designation : str, description : str,request: Request, username: str
             "user" : username,
             "designation" : designation,
             "description" : description,
-            "prediction" : pred[0],
+            "prediction" : pred["PrductCODE"],
             "validation" : "no"
             }   
     new_log = request.app.database[logs].insert_one(log)
@@ -133,22 +147,22 @@ def predict(designation : str, description : str,request: Request, username: str
         {"_id": new_log.inserted_id}
     )
     app.state.log_id = created_log["_id"]
-    return {"prediction" :pred[0], "probabilité" : pred[1]}
+    return {"prediction" : str(pred["PrductCODE"]), "probabilité" : int(pred["predict_proba"])}
 
-
+#requete modifiant la valeur "validation" pour la prédiction venant d'etre effectué, si la requete est appelé
 @app.put("/", response_description="mise à jour du dernier log entré")
 def update_user(request: Request):
     log_id = app.state.log_id
     if log_id is not None:
         update_result = request.app.database[logs].update_one(
-            {"_id": log_id}, {"validation" : "yes"}
+            {"_id": log_id}, {"$set": {"validation" : "yes"}}
         )
 
         if update_result.modified_count == 0:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"log with log_id {log_id} not found 1")
 
     if (
-        existing_log := request.app.database[logs].find_one({"_id": log_id})
+        existing_log := request.app.database[logs].find_one({"_id": log_id}, {'_id': 0})
     ) is not None:
         return existing_log
 

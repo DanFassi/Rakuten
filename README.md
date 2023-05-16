@@ -1,2 +1,0 @@
-# Rakuten
-Rakuten Challenge

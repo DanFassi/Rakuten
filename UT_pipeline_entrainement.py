@@ -66,43 +66,46 @@ except:
 
 
 #execute la fonction permettant de sauvegarder les données. Si une erreur survient, des logs de non execution sont enregistrés 
+#new_version = version_saving(vectorizer, le, model, history)
+
 try:
     new_version = version_saving(vectorizer, le, model, history)
+    #Les tests suivants vérifie la présence des logs ainsi que des nouveau fichier créer, et supprime ceux issues du test.
+    #--------------------------------------------------------------------------------------------------------------------
+    df = pd.read_csv("versions\\model\\model_training_history.csv",index_col = 0)
+    if new_version == df["version"].iloc[-1]:
+        checklist_training["log_record"] = 1
+        df1=df.drop(df.index[-10:])
+        df1.to_csv("versions\\model\\model_training_history.csv")       
+    else:
+        checklist_training["log_record"] = 0
+
+    if os.path.exists("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)):
+        checklist_training["CV_save"] = 1
+        os.remove("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version))
+    else:
+        checklist_training["CV_save"] = 0    
+
+    if os.path.exists("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)):
+        checklist_training["LE_save"] = 1
+        os.remove("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version))
+    else:
+        checklist_training["LE_save"] = 0
+
+    if os.path.exists("versions\\model\\Rakuten_model_v{}".format(new_version)):
+        checklist_training["model_save"] = 1
+        shutil.rmtree("versions\\model\\Rakuten_model_v{}".format(new_version))
+    else:
+        checklist_training["model_save"] = 0
+
+#--------------------------------------------------------------------------------------------------------------------
+
 except:
     checklist_training["log_record"] = 0
     checklist_training["CV_save"] = 0
     checklist_training["LE_save"] = 0
     checklist_training["model_save"] = 0
 
-#Les tests suivants vérifie la présence des logs ainsi que des nouveau fichier créer, et supprime ceux issues du test.
-#--------------------------------------------------------------------------------------------------------------------
-df = pd.read_csv("versions\\model\\model_training_history.csv",index_col = 0)
-if new_version == df["version"].iloc[-1]:
-    checklist_training["log_record"] = 1
-    df1=df.drop(df.index[-10:])
-    df1.to_csv("versions\\model\\model_training_history.csv")       
-else:
-    checklist_training["log_record"] = 0
-
-if os.path.exists("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)):
-    checklist_training["CV_save"] = 1
-    os.remove("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version))
-else:
-    checklist_training["CV_save"] = 0    
-
-if os.path.exists("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)):
-    checklist_training["LE_save"] = 1
-    os.remove("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version))
-else:
-    checklist_training["LE_save"] = 0
-
-if os.path.exists("versions\\model\\Rakuten_model_v{}".format(new_version)):
-    checklist_training["model_save"] = 1
-    shutil.rmtree("versions\\model\\Rakuten_model_v{}".format(new_version))
-else:
-    checklist_training["model_save"] = 0
-
-#--------------------------------------------------------------------------------------------------------------------
 
 #Enregistrement des données dans un fichier logs
 output = '''\n

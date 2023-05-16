@@ -107,7 +107,7 @@ def version_saving(vectorizer, labencoder, model, new_model_history):
     current_model_hist["version"] = new_version
     current_model_hist=current_model_hist[["version", "loss", "accuracy", "val_loss","val_accuracy"]]
 
-    total_hist = pd.concat([hist_df,current_model_hist]).reset_index() 	
+    total_hist = pd.concat([hist_df,current_model_hist]).reset_index(drop=True) 	
     with open("versions\\model\\model_training_history.csv", mode='w') as f:
         total_hist.to_csv(f)
 

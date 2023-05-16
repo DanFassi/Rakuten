@@ -1,156 +1,16 @@
 
 
-***********************************************
-Tests unitaire du pipeline d'entrainement
+****************************************************************************
+****************** Tests unitaires du 2023-05-16 17:12:19 ******************
+****************************************************************************
+Tests unitaires du pipeline de prédiction
 
 countvectorizer_size : 1
 object_type : 1
-format_pred : 1
+matrix_values : 1
+prediction : 1
 -----------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaire du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
------------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaire du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
------------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaire du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
------------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaire du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
------------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaire du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
------------------------------
-Pipeline entrainement : OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
-
-***********************************************
-Tests unitaires du pipeline d'entrainement
-
-countvectorizer_size : 1
-object_type : 1
-format_pred : 1
-model_selection : 1
-log_record : 1
-CV_save : 0
-LE_save : 1
-model_save : 1
------------------------------
-Pipeline entrainement : NOT OK
+Pipeline prédiction : OK
 
 ***********************************************
 Tests unitaires du pipeline d'entrainement
@@ -165,3 +25,13 @@ LE_save : 1
 model_save : 1
 -----------------------------
 Pipeline entrainement : OK
+
+***********************************************
+Tests unitaires de l'API 
+
+get_users : 1
+put_users : 1
+delete_users : 1
+prediction : 1
+-----------------------------
+API : OK

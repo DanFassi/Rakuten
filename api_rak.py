@@ -11,7 +11,7 @@ import uuid
 import base64
 import datetime
 
-from pipeline import prediction , text_processing
+from Pipeline_prediction import prediction , text_processing
 
 login = 'RGFuVXNlcg=='
 mdp = 'bXlwdw=='

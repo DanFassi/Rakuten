@@ -1,0 +1,167 @@
+
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaire du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+-----------------------------
+Pipeline entrainement : OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 0
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : NOT OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 1
+CV_save : 1
+LE_save : 1
+model_save : 1
+-----------------------------
+Pipeline entrainement : OK

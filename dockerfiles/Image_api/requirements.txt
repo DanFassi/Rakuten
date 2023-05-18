@@ -1,0 +1,8 @@
+fastapi
+pydantic
+typing 
+pymongo
+nltk
+tensorflow
+joblib
+uvicorn

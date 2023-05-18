@@ -1,0 +1,11 @@
+FROM ubuntu:20.04
+
+COPY /Rakuten/requirements.txt /
+
+RUN apt-get update && apt-get install python3-pip -y && pip install --no-cache-dir -r /requirements.txt
+
+VOLUME /rakuten
+
+WORKDIR /rakuten
+
+CMD uvicorn api_rak:app --reload --host 0.0.0.0

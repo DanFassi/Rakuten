@@ -2,7 +2,7 @@ FROM apache/airflow:latest
 
 ENV MY_DOCKER_PATH=/opt/airflow/rakuten
 
-COPY /Rakuten/requirements.txt /
+COPY /requirements.txt /
 
 RUN apt-get update && apt-get install python3-pip -y && pip install --no-cache-dir -r /requirements.txt
 RUN python3 -m nltk.downloader stopwords

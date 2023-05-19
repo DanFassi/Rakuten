@@ -7,8 +7,8 @@ COPY /requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 RUN python3 -m nltk.downloader stopwords
 
-ADD Rakuten/Pipeline_entrainement.py /opt/airflow/dags
-ADD Rakuten/Mongodb_connect.py /opt/airflow/dags
-ADD Rakuten/dag_airflow.py /opt/airflow/dags
+ADD /Pipeline_entrainement.py /opt/airflow/dags
+ADD /Mongodb_connect.py /opt/airflow/dags
+ADD /dag_airflow.py /opt/airflow/dags
 
 VOLUME /opt/airflow/rakuten

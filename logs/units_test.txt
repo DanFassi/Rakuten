@@ -35,3 +35,17 @@ delete_users : 1
 prediction : 1
 -----------------------------
 API : OK
+
+***********************************************
+Tests unitaires du pipeline d'entrainement
+
+countvectorizer_size : 1
+object_type : 1
+format_pred : 1
+model_selection : 1
+log_record : 0
+CV_save : 0
+LE_save : 0
+model_save : 0
+-----------------------------
+Pipeline entrainement : NOT OK

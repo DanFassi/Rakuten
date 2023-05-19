@@ -12,5 +12,3 @@ ADD /Mongodb_connect.py /opt/airflow/dags
 ADD /dag_airflow.py /opt/airflow/dags
 
 VOLUME /opt/airflow/rakuten
-
-EXPOSE 7000:7000

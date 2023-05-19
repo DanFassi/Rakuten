@@ -5,5 +5,5 @@ typing
 pymongo
 nltk
 tensorflow
-sklearn
+scikit-learn
 joblib

@@ -1,12 +1,15 @@
-FROM ubuntu:20.04
+FROM apache/airflow:latest
 
-ADD files/requirements.txt files/api_rak.py files/Pipeline_prediction.py ./
+ENV MY_DOCKER_PATH=/opt/airflow/rakuten
 
-#ADD requirements.txt main.py ./
-#COPY requirements.txt requirements.txt
+COPY /Rakuten/requirements.txt /
 
-RUN apt-get update && apt-get install python3-pip -y &&  && pip install -r requirements.txt
+RUN apt-get update && apt-get install python3-pip -y && pip install --no-cache-dir -r /requirements.txt
+RUN python3 -m nltk.downloader stopwords
 
-EXPOSE 8000
+ADD /Rakuten/Pipeline_prediction.py /opt/airflow/
+ADD /Rakuten/Mongodb_connect.py /opt/airflow/
 
-CMD uvicorn main:app --host 0.0.0.0
+VOLUME /opt/airflow/rakuten
+
+EXPOSE 7000:7000

@@ -2,7 +2,6 @@ from fastapi import FastAPI, Header, Security, Depends, HTTPException, status, A
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.encoders import jsonable_encoder
-from passlib.context import CryptContext
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from pymongo import MongoClient

@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import base64
 import pandas as pd
+import os
 
 #****************************
 #Rajouter variable d'environnement pour :
@@ -10,6 +11,11 @@ import pandas as pd
 #logs (secret)
 #trigger (configmap)
 
+# Génére une variable non vide si une variable d'environnement concernant le chemin d'accès vers les répertoires est présente
+if os.getenv("MY_DOCKER_PATH") is None:
+    my_path = ""
+else:
+    my_path = os.getenv("MY_DOCKER_PATH") + "\\"
 
 def mongo_trigger():
     #recuperation des variables d'environnements
@@ -64,13 +70,13 @@ def training_data_update():
     update_X = validated_df[["designation","description"]]
     update_y = validated_df["prediction"].rename("prdtypecode")
 
-    X_df = pd.read_csv("X.csv",index_col = 0)
+    X_df = pd.read_csv(my_path +"X.csv",index_col = 0)
     updated_X_df = pd.concat([X_df,update_X]).reset_index(drop=True)
-    updated_X_df.to_csv("X.csv")
+    updated_X_df.to_csv(my_path +"X.csv")
 
-    y_df = pd.read_csv("Y.csv",index_col = 0)
+    y_df = pd.read_csv(my_path +"Y.csv",index_col = 0)
     updated_y_df = pd.concat([y_df,update_y]).reset_index(drop=True) 	
-    updated_y_df.to_csv("Y.csv")
+    updated_y_df.to_csv(my_path +"Y.csv")
 
     #suppression des données présent dans mango pour eviter de futurs doublons:
 

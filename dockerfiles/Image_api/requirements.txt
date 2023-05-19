@@ -6,3 +6,4 @@ nltk
 tensorflow
 joblib
 uvicorn
+scikit-learn

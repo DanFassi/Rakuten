@@ -6,8 +6,8 @@ from Pipeline_entrainement import dataframe_processing, target_processing, MLmod
 import pandas as pd
 
 def modelisation():
-    X_df = pd.read_csv("/app/X.csv",index_col = 0)
-    y_df = pd.read_csv("/app/y.csv",index_col = 0)
+    X_df = pd.read_csv("X.csv",index_col = 0)
+    y_df = pd.read_csv("y.csv",index_col = 0)
     X, vectorizer = dataframe_processing(X_df)
     y, le = target_processing(y_df)
     model , history = MLmodel(X,y)

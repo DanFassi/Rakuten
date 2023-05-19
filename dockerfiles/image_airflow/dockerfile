@@ -1,4 +1,4 @@
-FROM apache/airflow:latest
+FROM apache/airflow:2.6.1
 
 ENV MY_DOCKER_PATH=/opt/airflow/rakuten
 

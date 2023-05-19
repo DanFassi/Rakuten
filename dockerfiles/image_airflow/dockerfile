@@ -7,8 +7,8 @@ COPY /requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 RUN python3 -m nltk.downloader stopwords
 
-ADD /Rakuten/Pipeline_prediction.py /opt/airflow/
-ADD /Rakuten/Mongodb_connect.py /opt/airflow/
+ADD /Pipeline_prediction.py /opt/airflow/
+ADD /Mongodb_connect.py /opt/airflow/
 
 VOLUME /opt/airflow/rakuten
 

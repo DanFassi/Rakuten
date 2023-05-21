@@ -4,10 +4,17 @@ from airflow.operators.python import PythonOperator, BranchPythonOperator
 from Mongodb_connect import mongo_trigger, training_data_update
 from Pipeline_entrainement import dataframe_processing, target_processing, MLmodel, model_selection,  version_saving
 import pandas as pd
+import os
+
+if os.getenv("MY_DOCKER_PATH") is None:
+    my_path = ""
+else:
+    my_path = os.getenv("MY_DOCKER_PATH") + "/"
+
 
 def modelisation():
-    X_df = pd.read_csv("X.csv",index_col = 0)
-    y_df = pd.read_csv("y.csv",index_col = 0)
+    X_df = pd.read_csv(my_path+"X.csv",index_col = 0)
+    y_df = pd.read_csv(my_path+"y.csv",index_col = 0)
     X, vectorizer = dataframe_processing(X_df)
     y, le = target_processing(y_df)
     model , history = MLmodel(X,y)

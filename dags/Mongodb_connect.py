@@ -15,7 +15,7 @@ import os
 if os.getenv("MY_DOCKER_PATH") is None:
     my_path = ""
 else:
-    my_path = os.getenv("MY_DOCKER_PATH") + "\\"
+    my_path = os.getenv("MY_DOCKER_PATH") + "/"
 
 def mongo_trigger():
     #recuperation des variables d'environnements

@@ -18,7 +18,7 @@ from tensorflow.keras.layers import Dense, Input
 if os.getenv("MY_DOCKER_PATH") is None:
     my_path = ""
 else:
-    my_path = os.getenv("MY_DOCKER_PATH") + "\\"
+    my_path = os.getenv("MY_DOCKER_PATH") + "/"
 
 # =============================================================================
 # fonctions utilisés pour le processing d'un dataframe:
@@ -92,7 +92,7 @@ def MLmodel(X,y):
 
 #4 Comparason de performance avec le modèle en cour (cad le dernier modèle enregistré dans le log) 
 def model_selection(new_model_history):
-    df = pd.read_csv(my_path + "versions\\model\\model_training_history.csv",index_col = 0)
+    df = pd.read_csv(my_path + "versions/model/model_training_history.csv",index_col = 0)
     last_model_version = df["version"].iloc[-1]
     last_model_val_accuracy = max(df[df["version"] == last_model_version ]["val_accuracy"])
     new_model_val_accuracy = max(new_model_history.history['val_accuracy'])
@@ -106,7 +106,7 @@ def model_selection(new_model_history):
 def version_saving(vectorizer, labencoder, model, new_model_history):
     
     #Sauvegarde de l'historique d'entrainement ainsi que du numero de version
-    hist_df = pd.read_csv(my_path +"versions\\model\\model_training_history.csv",index_col = 0)
+    hist_df = pd.read_csv(my_path +"versions/model/model_training_history.csv",index_col = 0)
 
     #itération du numero de version sur la base du numero de la dernier ligne du fichier log
     new_version = hist_df["version"].iloc[-1]+1
@@ -116,16 +116,16 @@ def version_saving(vectorizer, labencoder, model, new_model_history):
     current_model_hist=current_model_hist[["version", "loss", "accuracy", "val_loss","val_accuracy"]]
 
     total_hist = pd.concat([hist_df,current_model_hist]).reset_index(drop=True) 	
-    with open(my_path +"versions\\model\\model_training_history.csv", mode='w') as f:
+    with open(my_path +"versions/model/model_training_history.csv", mode='w') as f:
         total_hist.to_csv(f)
 
     #Sauvegarde du count_vectorizer
-    CV_filename = my_path +"versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)
+    CV_filename = my_path +"versions/count_vectorizer/Rakuten_CountVectorizer_v{}.sav".format(new_version)
     joblib.dump(vectorizer, CV_filename)
     #Sauvegarde du label_encoder
-    LE_filename = my_path +"versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)
+    LE_filename = my_path +"versions/label_encoder/Rakuten_LabelEncoder_v{}.sav".format(new_version)
     joblib.dump(labencoder, LE_filename)
     #sauvegarde du model
-    model_directoryname = my_path +"versions\\model\\Rakuten_model_v{}".format(new_version)
+    model_directoryname = my_path +"versions/model/Rakuten_model_v{}".format(new_version)
     model.save(model_directoryname)
     return new_version

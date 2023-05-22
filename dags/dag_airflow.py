@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.utils.dates import days_ago
-from airflow.operators.python import PythonOperator, BranchPythonOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator, DummyOperator
 from Mongodb_connect import mongo_trigger, training_data_update
 from Pipeline_entrainement import dataframe_processing, target_processing, MLmodel, model_selection,  version_saving
 import pandas as pd
@@ -21,6 +21,12 @@ def modelisation():
     if model_selection(history):
         version_saving(vectorizer, le, model, history)
 
+def branching():
+    test = mongo_trigger()
+    if test:
+        return "Dataframe_update"
+    else:
+        return 'stop'
     
 #dag se déclanchant chaque jour
 rakuten_dag = DAG(
@@ -35,7 +41,7 @@ rakuten_dag = DAG(
 task1 = BranchPythonOperator(
     task_id= "BDD_trigger_condition_check",
     provide_context = True,
-    python_callable = mongo_trigger,
+    python_callable = branching,
     dag  = rakuten_dag
 )
 
@@ -50,3 +56,8 @@ task3 = PythonOperator(
     python_callable =  modelisation,
     dag  = rakuten_dag
 )
+task4 = DummyOperator(task_id='stop', dag=rakuten_dag)
+
+
+task1 >> [task2,task4] 
+task2 >> task3

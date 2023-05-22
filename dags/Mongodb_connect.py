@@ -79,6 +79,3 @@ def training_data_update():
     updated_y_df.to_csv(my_path +"Y.csv")
 
     #suppression des données présent dans mango pour eviter de futurs doublons:
-
-
-training_data_update()

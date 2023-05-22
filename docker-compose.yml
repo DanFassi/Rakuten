@@ -22,7 +22,7 @@ x-airflow-common: &airflow-common
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - /home/ubuntu/Rakuken:/opt/airflow/rakuten
+    - /home/ubuntu/Rakuten:/opt/airflow/rakuten
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     redis:
@@ -121,7 +121,7 @@ services:
     ports:
     - "8000:8000"
     volumes:
-      - /home/ubuntu/Rakuken:/rakuten
+      - /home/ubuntu/Rakuten:/rakuten
 
 volumes:
   postgres-db-volume:

@@ -78,5 +78,4 @@ def training_data_update():
     updated_y_df = pd.concat([y_df,update_y]).reset_index(drop=True) 	
     updated_y_df.to_csv(my_path +"Y.csv")
 
-    #suppression des données présent dans mango pour eviter de futurs doublons:
-
+    #attention, des doublons peuvent etre insérer de maniere cumulative dans la BDD puisque on ne supprime pas les doublons déjà existant dans la BDD avec l'ajout des nouvelles lignes (contenant au cumulé les doublons des autres updates)

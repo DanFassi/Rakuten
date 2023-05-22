@@ -14,7 +14,8 @@ else:
 
 
 def modelisation():
-    X_df = pd.read_csv(my_path+"X.csv",index_col = 0)
+    #index_col = 0 supprimer de X_df. L'ecriture de nouvelles données dans la BDD se faisant sans index
+    X_df = pd.read_csv(my_path+"X.csv")
     y_df = pd.read_csv(my_path+"y.csv",index_col = 0)
     X, vectorizer = dataframe_processing(X_df)
     y, le = target_processing(y_df)
@@ -61,4 +62,4 @@ task4 = DummyOperator(task_id='stop', dag=rakuten_dag)
 
 
 task1 >> [task2,task4] 
-task2 >> task3
+#task2 >> task3

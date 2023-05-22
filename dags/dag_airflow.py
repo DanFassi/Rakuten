@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.utils.dates import days_ago
-from airflow.operators.python import PythonOperator, BranchPythonOperator, DummyOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator
+from airflow.operators import DummyOperator
 from Mongodb_connect import mongo_trigger, training_data_update
 from Pipeline_entrainement import dataframe_processing, target_processing, MLmodel, model_selection,  version_saving
 import pandas as pd

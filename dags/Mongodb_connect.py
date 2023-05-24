@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import base64
 import pandas as pd
 import os
+import csv
 
 #****************************
 #Rajouter variable d'environnement pour :
@@ -70,9 +71,16 @@ def training_data_update():
     update_X = validated_df[["designation","description"]]
     update_y = validated_df["prediction"].rename("prdtypecode")
 
-    X_df = pd.read_csv(my_path +"X.csv",index_col = 0)
-    updated_X_df = pd.concat([X_df,update_X]).reset_index(drop=True)
-    updated_X_df.to_csv(my_path +"X.csv")
+    #Code ci dessous abandonner pour des raisons de limite de mémoire de la machine virtuelle
+
+    #X_df = pd.read_csv(my_path +"X.csv",index_col = 0)
+    #updated_X_df = pd.concat([X_df,update_X]).reset_index(drop=True)
+    #updated_X_df.to_csv(my_path +"X.csv")
+
+    with open(my_path + 'X.csv', 'a', encoding="utf-8") as f:
+        writer = csv.writer(f)
+        for index, row in update_X.iterrows():
+            writer.writerow(row)
 
     y_df = pd.read_csv(my_path +"Y.csv",index_col = 0)
     updated_y_df = pd.concat([y_df,update_y]).reset_index(drop=True) 	

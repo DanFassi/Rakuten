@@ -1,9 +1,0 @@
-fastapi
-passlib
-pydantic
-typing 
-pymongo
-nltk
-tensorflow
-scikit-learn
-joblib

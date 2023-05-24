@@ -7,3 +7,5 @@ tensorflow
 joblib
 uvicorn
 scikit-learn
+pytest
+passlib

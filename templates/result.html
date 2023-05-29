@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    <title>Projet Rakuten - Result</title>
+  </head>
+  <body>
+    <header>
+      <img src="{{ url_for('static', path='/logodata.webp') }}" alt="Datascientest" />
+      <img src="{{ url_for('static', path='/rakuten.webp')}}" alt="rakuten" />
+    </header>
+    <h1>Le code produit associé à votre saisie :</h1>
+    <p>Prediction: {{ result }}</p>
+    <label class="prediction-label">La prédiction vous semble-t-elle correcte?</label>
+    <div class="prediction">
+      <button class="button-submit prediction-value" type="button" value="Oui" id="oui">Oui</button>
+      <button class="button-submit prediction-value" type="button" value="Non" id="non">Non</button>
+    </div>
+    <input class="button-submit" type="button" value="Nouvelle recherche" id="new-search" />
+    
+    <script>
+      // Add event listeners to the buttons
+      document.getElementById("oui").addEventListener("click", function() {
+        makeApiCall("oui");
+      });
+
+      document.getElementById("non").addEventListener("click", function() {
+        makeApiCall("non");
+      });
+
+      // Function to make the API call
+      function makeApiCall(value) {
+        // Perform your API call here using the selected value
+        // Example using fetch:
+        fetch("/", {
+          method: "PUT",
+          body: JSON.stringify({ value: value }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the API response here
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle errors
+          console.error(error);
+        });
+      }
+
+      // Add event listener to the "Nouvelle recherche" button
+      document.getElementById("new-search").addEventListener("click", function() {
+        // Redirect to the input page or perform any other action
+        window.location.href = "/input";
+      });
+    </script>
+  </body>
+</html>

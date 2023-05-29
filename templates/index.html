@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    <title>Projet Rakuten - Login</title>
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', path='/logodata.webp') }}" alt="Datascientest" />
+      <img src="{{ url_for('static', path='/rakuten.webp')}}" alt="rakuten" />
+  </header> 
+ 
+  <!-- <div class="form-user"> -->
+  <h1 class="user-title">Bienvenue, veuillez renseigner vos identifiants :</h1>
+  <div class="form-input form-user">
+    <form action="/login" method="POST">
+      <div class="form-item1">
+        <label for="username" class="label-user">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-item2">
+        <label for="password" class="label-user">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+        <input class="button-submit user-submit" type="submit" value="Login">
+    <!-- </div> -->
+    </form>
+    <a class="button-submit signup-submit" href="/inscription" >S'inscrire</a>
+  </div>
+</body>
+</html>

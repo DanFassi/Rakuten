@@ -1,4 +1,4 @@
-from Pipeline_entrainement import dataframe_processing , MLmodel , target_processing, version_saving, model_selection
+from dags.Pipeline_entrainement import dataframe_processing , MLmodel , target_processing, version_saving, model_selection
 import numpy as np
 import joblib
 import pandas as pd

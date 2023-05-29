@@ -4,13 +4,6 @@ import pandas as pd
 import os
 import csv
 
-#****************************
-#Rajouter variable d'environnement pour :
-#login (secret)
-#mdp (secret)
-#collection (secret)
-#logs (secret)
-#trigger (configmap)
 
 # Génére une variable non vide si une variable d'environnement concernant le chemin d'accès vers les répertoires est présente
 if os.getenv("MY_DOCKER_PATH") is None:
@@ -20,17 +13,17 @@ else:
 
 def mongo_trigger():
     #recuperation des variables d'environnements
-    trigger = 1
-    login = 'RGFuVXNlcg=='
-    mdp = 'bXlwdw=='
+    trigger = os.getenv("TRAINING_TRIGGER")
+    DB_NAME= os.getenv("MONGODB_DB_NAME")
+    logs = os.getenv("MONGODB_DB_COL_LOGS")
+
 
     #connection à la BDD et extraction des informations
     ATLAS_URI="mongodb+srv://{login}:{pw}@clusterdan.lpuyh34.mongodb.net/test".format(
-        login= base64.b64decode(login).decode("utf-8"), 
-        pw = base64.b64decode(mdp).decode("utf-8")
+        login= base64.b64decode(os.getenv("MONGODB_LOG")).decode("utf-8"), 
+        pw = base64.b64decode(os.getenv("MONGODB_PW")).decode("utf-8")
         )
-    DB_NAME="RAKUTEN_logs"
-    logs = "logs"
+
     mongodb_client = MongoClient(ATLAS_URI)
     database = mongodb_client[DB_NAME]
     mongo_df = pd.DataFrame(list(database[logs].find({})))
@@ -50,16 +43,15 @@ def mongo_trigger():
 
 def training_data_update():
     #recuperation des variables d'environnements
-    login = 'RGFuVXNlcg=='
-    mdp = 'bXlwdw=='
+    DB_NAME= os.getenv("MONGODB_DB_NAME")
+    logs = os.getenv("MONGODB_DB_COL_LOGS")
 
     #connection à la BDD et extraction des informations
     ATLAS_URI="mongodb+srv://{login}:{pw}@clusterdan.lpuyh34.mongodb.net/test".format(
-        login= base64.b64decode(login).decode("utf-8"), 
-        pw = base64.b64decode(mdp).decode("utf-8")
+        login= base64.b64decode(os.getenv("MONGODB_LOG")).decode("utf-8"), 
+        pw = base64.b64decode(os.getenv("MONGODB_PW")).decode("utf-8")
         )
-    DB_NAME="RAKUTEN_logs"
-    logs = "logs"
+
     mongodb_client = MongoClient(ATLAS_URI)
     database = mongodb_client[DB_NAME]
     mongo_df  = pd.DataFrame(list(database[logs].find({})))

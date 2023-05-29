@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up</title>
+</head>
+<body>
+    <script>
+        // Display the pop-up message
+        alert("{{ popup_message }}");
+
+        // Redirect to the specified URL after a delay
+        setTimeout(function() {
+            window.location.href = "{{ redirect_url }}";
+        }, 2000);  // 2000 milliseconds (2 seconds) delay before redirecting
+    </script>
+</body>
+</html>

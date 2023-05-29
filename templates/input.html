@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    <title>Projet Rakuten - Data</title>
+  </head>
+  <body>
+    <header>
+      <img src="{{ url_for('static', path='/logodata.webp') }}" alt="Datascientest" />
+      <img src="{{ url_for('static', path='/rakuten.webp')}}" alt="rakuten" />
+    </header>
+    <h1>
+      Veuillez entrer le nom de l'article recherché ainsi que sa description
+    </h1>
+    <form action="/predict" method="POST">
+      <div class="form-input">
+        <div class="form-item1">
+          <label for="designation">Designation:</label>
+          <input type="text" id="designation" name="designation" required />
+        </div>
+        <div class="form-item2">
+          <label for="description">Description:</label>
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            required
+          ></textarea>
+        </div>
+      </div>
+      <input class="button-submit" type="submit" value="Rechercher" />
+    </form>
+  </body>
+</html>

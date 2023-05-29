@@ -62,4 +62,4 @@ task4 = DummyOperator(task_id='stop', dag=rakuten_dag)
 
 
 task1 >> [task2,task4] 
-#task2 >> task3
+task2 >> task3

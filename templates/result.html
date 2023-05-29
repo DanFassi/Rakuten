@@ -12,7 +12,7 @@
       <img src="{{ url_for('static', path='/rakuten.webp')}}" alt="rakuten" />
     </header>
     <h1>Le code produit associé à votre saisie :</h1>
-    <p>Prediction: {{ result }}</p>
+    <p class="resultat"> {{ result }}</p>
     <label class="prediction-label">La prédiction vous semble-t-elle correcte?</label>
     <div class="prediction">
       <button class="button-submit prediction-value" type="button" value="Oui" id="oui">Oui</button>

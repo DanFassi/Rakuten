@@ -19,7 +19,7 @@ p, h1, label, a{
 }
 h1{
    
-   margin-left: 35%;
+   margin-left: 37%;
 }
 form{
     display: flex;
@@ -47,7 +47,6 @@ label, input {
 .label-user{
     margin-left: 15%;
 }
-
 label {
     margin-bottom: 15px;
     margin-left: 34%;
@@ -97,15 +96,17 @@ textarea{
 .user-title{
     margin-left: 40%;
 }
-.result{
+.resultat{
     display: flex;
     justify-content: center;
+    margin-top: 2%;
+    margin-right: 5%;
 }
 
 .prediction-label{
     display: flex;
-    margin-top: 5%;
-    margin-left: 37%;
+    margin-top: 2%;
+    margin-left: 36.7%;
 }
 
 .prediction{
@@ -121,6 +122,7 @@ textarea{
 }
 
 #new-search{
+    margin-left: 38%;
     margin-top: 0%;
     width: 20%;
 }

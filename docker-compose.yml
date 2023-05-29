@@ -15,6 +15,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__SMTP__SMTP_USER: "de.airflow@gmail.com"
     AIRFLOW__SMTP__SMTP_PASSWORD: "cfsrvkongsobheta"
     AIRFLOW__SMTP__SMTP_MAIL_FROM: "de.airflow@gmail.com"
+    AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL: 30
     MY_DOCKER_PATH: /opt/airflow/rakuten
     TRAINING_TRIGGER: 1
 

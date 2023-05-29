@@ -1,0 +1,20 @@
+FROM ubuntu:20.04
+
+COPY /Rakuten/requirements.txt /
+
+RUN apt-get update && apt-get install python3-pip -y && pip install python-multipart && pip install --no-cache-dir -r /requirements.txt
+RUN python3 -m nltk.downloader stopwords
+
+VOLUME /rakuten
+
+WORKDIR /rakuten
+
+EXPOSE 8000:8000
+
+ENV MONGODB_LOG=RGFuVXNlcg==
+ENV MONGODB_PW=bXlwdw==
+ENV MONGODB_DB_NAME=RAKUTEN_logs
+ENV MONGODB_DB_COL_USERS=my_collection
+ENV MONGODB_DB_COL_LOGS=logs
+
+CMD uvicorn api_rak:app --port 8000 --reload --host 0.0.0.0

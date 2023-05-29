@@ -1,0 +1,20 @@
+FROM apache/airflow:2.6.1
+
+ENV MY_DOCKER_PATH=/opt/airflow/rakuten
+
+COPY /requirements.txt /
+
+RUN pip install --no-cache-dir -r /requirements.txt
+RUN python3 -m nltk.downloader stopwords
+
+ADD /Pipeline_entrainement.py /opt/airflow/dags
+ADD /Mongodb_connect.py /opt/airflow/dags
+#ADD Rakuten/dag_airflow.py /opt/airflow/dags
+
+ENV MONGODB_LOG=RGFuVXNlcg==
+ENV MONGODB_PW=bXlwdw==
+ENV MONGODB_DB_NAME=RAKUTEN_logs
+ENV MONGODB_DB_COL_USERS=collection
+ENV MONGODB_DB_COL_LOGS=logs
+
+VOLUME /opt/airflow/rakuten

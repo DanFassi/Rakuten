@@ -19,12 +19,16 @@ Le dossier Rakuten_model contient le modèle actuel.
 ### Les fichiers
 
 le fichier api_rak.py contient l'API utilisé par la programme.
+
 le fichier Pipelines_prediction.py contient les fonctions appellées par l'API pour prédire une catégorie de produit.
+
 les fichiers Rakuten_CountVectorizer.sav et Rakuten_LabelEncoder.sav sont les versions actuelle utilisé dans le retraitement des données textuelles entrées par l'utilisateur.
 
 Les fichiers X.csv et Y.csv correspondant aux features et target d'entrainement. ces deux fichiers sont mis à jour dans le cas du process de ré-entrainement.
 
 Le fichier docker-compose permet de lancer l'application, c'est à dire qu'il effectue le lancement de l'API et de AIRFLOW.
+
+Enfin les fichier test_xxx sont necessaire pour les tests unitaires effectué par un action github à chaque nouveau push sur ce repo.
 
 ## Comment lancer l'application
 

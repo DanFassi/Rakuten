@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
 from api_rak import app  
 
+@pytest.fixture
 def client():
     with AsyncClient(app=app, base_url="http://localhost:8000") as client:
         yield client

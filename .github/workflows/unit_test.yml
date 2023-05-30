@@ -31,11 +31,11 @@ jobs:
     - name: launch API
       run: uvicorn api_rak:app --port 8000 --reload --host 0.0.0.0 &
       env: |
-        MONGODB_LOG:${{ secrets.MONGODB_LOG }}
-        MONGODB_PW:${{ secrets.MONGODB_PW }}
-        MONGODB_DB_NAME:${{ env.MONGODB_DB_NAME }}
-        MONGODB_DB_COL_USERS:${{ env.MONGODB_DB_COL_USERS }}
-        MONGODB_DB_COL_LOGS:${{ env.MONGODB_DB_COL_LOGS }}
+        MONGODB_LOG: ${{ secrets.MONGODB_LOG }}
+        MONGODB_PW: ${{ secrets.MONGODB_PW }}
+        MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}
+        MONGODB_DB_COL_USERS: ${{ env.MONGODB_DB_COL_USERS }}
+        MONGODB_DB_COL_LOGS: ${{ env.MONGODB_DB_COL_LOGS }}
     - name: Tests with pytest
       run: |
         pytest

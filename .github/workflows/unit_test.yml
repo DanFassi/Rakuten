@@ -33,6 +33,8 @@ jobs:
       env: 
         MONGODB_LOG: ${{ secrets.MONGODB_LOG }}
         MONGODB_PW: ${{ secrets.MONGODB_PW }}
+        TEST_LOG: ${{ secrets.TEST_LOG }}
+        TEST_PW: ${{ secrets.TEST_PW }}
         MONGODB_DB_NAME: 'RAKUTEN_logs'
         MONGODB_DB_COL_USERS: 'my_collection'
         MONGODB_DB_COL_LOGS: 'logs'

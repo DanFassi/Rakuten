@@ -14,7 +14,7 @@ async def test_create_user(client):
     form_data = {"username": "testuser", "password": "testpass", "role" : "user"}
 
     # Send a POST request to create a new user
-    response = await client.post("admin/creation", data=form_data)
+    response = await client.post("/user/creation", data=form_data)
 
     # Verify the response
     assert response.status_code == HTTP_201_CREATED

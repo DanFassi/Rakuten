@@ -11,3 +11,4 @@ pytest
 passlib
 jinja2
 pandas
+httpx

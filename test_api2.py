@@ -1,22 +1,18 @@
-import requests
-import os
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
+from fastapi import FastAPI
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
-from api_rak import app 
+from api_rak import app  
 
-address= "localhost:8000"
-
-#session = requests.Session()
-#session.auth = (os.getenv("TEST_LOG"), os.getenv("TEST_PW"))
-#auth = session.post('http://' + address)
-
+@pytest.fixture
 def client():
     """
     Create a test client using the FastAPI app
     """
-    with TestClient(app) as client:
+    with AsyncClient(app=app, base_url="http://testserver") as client:
         yield client
 
+@pytest.mark.asyncio
 async def test_create_user(client):
     # Prepare test data
     form_data = {"username": "testuser", "password": "testpass"}
@@ -28,6 +24,7 @@ async def test_create_user(client):
     assert response.status_code == HTTP_201_CREATED
     assert "Nouvel utilisateur créé" in response.text
 
+@pytest.mark.asyncio
 async def test_predict(client):
     # Prepare test data
     form_data = {"designation": "Test Designation", "description": "Test Description"}
@@ -39,6 +36,7 @@ async def test_predict(client):
     assert response.status_code == 200
     assert "result" in response.text
 
+@pytest.mark.asyncio
 async def test_delete_user(client):
     # Prepare test data
     username = "testuser"
@@ -49,6 +47,7 @@ async def test_delete_user(client):
     # Verify the response
     assert response.status_code == HTTP_204_NO_CONTENT
 
+@pytest.mark.asyncio
 async def test_update_user(client):
     # Prepare test data
     username = "testuser"
@@ -62,7 +61,7 @@ async def test_update_user(client):
     assert response.json()["name"] == username
     assert response.json()["role"] == "admin"
 
-
+@pytest.mark.asyncio
 async def test_update_user_not_found(client):
     # Prepare test data
     username = "nonexistentuser"

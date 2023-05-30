@@ -58,11 +58,11 @@ router3 = APIRouter()
 # Fonctions API liées à l'inscription et à l'identification
 # =============================================================================
 current_username = None
+current_role = "user"
 
 #requete permettant d'ajouter un nouvel utilisateur ainsi que son mot de passe dans la base
 @router.post("/creation", response_description="Creation d'un nouvel utilisateur", status_code=status.HTTP_201_CREATED)
 async def create_user(request: Request):
-    print("COUCOU")
     form_data = await request.form()
     username = form_data["username"]
     password = form_data["password"]   
@@ -92,7 +92,7 @@ def list_users(request: Request):
 
 #requete verifiant la validité du nom d'utilisateur ainsi que du mot de passe
 @router3.post("/login")
-def get_current_user(request: Request, background_tasks: BackgroundTasks, credentials: HTTPBasicCredentials = Depends(security), user_agent:str = Header(None)):
+def get_current_user(request: Request, background_tasks: BackgroundTasks, credentials: HTTPBasicCredentials = Depends(security), user_agent:str = Header(None)): 
     logbdd =  requests.get(url='http://localhost:8000/user/').json()
     users = {key: value for key, value in zip([d["name"] for d in logbdd], [d["password"] for d in logbdd])}
     username = credentials.username
@@ -103,10 +103,18 @@ def get_current_user(request: Request, background_tasks: BackgroundTasks, creden
             headers={"WWW-Authenticate": "Basic"},
         )
     else:
+        global current_username
+        current_username = username
         roles = {key: value for key, value in zip([d["name"] for d in logbdd], [d["role"] for d in logbdd])}
+        global current_role
+        current_role = roles[username] 
         if roles[username] != "admin":
+            #global current_role
+            #current_role = "user"
             return  templates.TemplateResponse("input.html", {"request": request})
         else:
+            #global current_role
+            #current_role = "admin"
             return  templates.TemplateResponse("admin.html", {"request": request})
 
 
@@ -114,15 +122,17 @@ def get_current_user(request: Request, background_tasks: BackgroundTasks, creden
 # Fonctions API liées à l'interface
 # =============================================================================
 
+#requete permettant de naviguer vers la d'accueil
 @router3.get('/')
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+    
 
 #requete retournant une prediction en fonction des informations fournit par l'utilisateur, et stock les résultats dans la base logs
 @router3.post("/predict", response_class=HTMLResponse)
 #def predict(designation : str, description : str,request: Request, username: str = Depends(get_current_user)):
 async def predict(request: Request):
-    global current_username
+    #global current_username
     username = current_username
     form_data = await request.form()
     designation = form_data["designation"]
@@ -141,7 +151,10 @@ async def predict(request: Request):
     )
     app.state.log_id = created_log["_id"]
     result = str(pred["PrductCODE"])
-    return templates.TemplateResponse("result.html", {"request": request, "result": result})
+    if current_username is None:
+        return templates.TemplateResponse("index.html", {"request": request})
+    else:
+        return templates.TemplateResponse("result.html", {"request": request, "result": result})
 
 #requete modifiant la valeur "validation" pour la prédiction venant d'etre effectué, si la requete est appelé
 @router3.put("/", response_description="mise à jour du dernier log entré")
@@ -162,7 +175,14 @@ def update_user(request: Request):
 #requete permettant de naviguer vers la page input
 @router3.get('/input')
 def input(request: Request):
-    return templates.TemplateResponse("input.html", {"request": request})
+    if current_username is None:
+        return templates.TemplateResponse("index.html", {"request": request})
+    else:
+        if current_role != "admin":
+            return templates.TemplateResponse("input.html", {"request": request})
+        else:
+            return  templates.TemplateResponse("admin.html", {"request": request})
+
 
 #requete permettant de naviguer vers la page inscription
 @router3.get('/inscription')

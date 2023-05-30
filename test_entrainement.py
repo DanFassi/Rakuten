@@ -8,6 +8,11 @@ import shutil
 ##############################################################################################################################
 #################################### Unit Test pour la partie de ré-entrainement #############################################
 ##############################################################################################################################
+if os.getenv("MY_DOCKER_PATH") is None:
+    my_path = ""
+else:
+    my_path = os.getenv("MY_DOCKER_PATH") + "/"
+
 
 #importation d'une partie du dataframe pour effectier un test rapide
 df = pd.read_csv("X.csv", skipfooter= 84000, engine = 'python')
@@ -53,25 +58,25 @@ new_version = version_saving(vectorizer, le, model, history)
     #Les tests suivants vérifie la présence des logs ainsi que des nouveau fichier créer, et supprime ceux issues du test.
     #--------------------------------------------------------------------------------------------------------------------
 def test_ecriture_logs():
-    df = pd.read_csv("versions\\model\\model_training_history.csv",index_col = 0)
+    df = pd.read_csv(my_path + "versions\\model\\model_training_history.csv",index_col = 0)
     assert new_version == df["version"].iloc[-1]
     if new_version == df["version"].iloc[-1]:
         df1=df.drop(df.index[-10:])
-        df1.to_csv("versions\\model\\model_training_history.csv")       
+        df1.to_csv(my_path + "versions\\model\\model_training_history.csv")       
 
 def test_save_CV():
-    assert os.path.exists("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)) ==True
-    if os.path.exists("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)):
-        os.remove("versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version))  
+    assert os.path.exists(my_path + "versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)) ==True
+    if os.path.exists(my_path + "versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version)):
+        os.remove(my_path + "versions\\count_vectorizer\\Rakuten_CountVectorizer_v{}.sav".format(new_version))  
 
 def test_save_LE():
-    assert os.path.exists("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)) == True
-    if os.path.exists("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)):
-        os.remove("versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version))
+    assert os.path.exists(my_path + "versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)) == True
+    if os.path.exists(my_path + "versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version)):
+        os.remove(my_path + "versions\\label_encoder\\Rakuten_LabelEncoder_v{}.sav".format(new_version))
 
 def test_save_model():
-    assert os.path.exists("versions\\model\\Rakuten_model_v{}".format(new_version))
-    if os.path.exists("versions\\model\\Rakuten_model_v{}".format(new_version)):
-        shutil.rmtree("versions\\model\\Rakuten_model_v{}".format(new_version))
+    assert os.path.exists(my_path + "versions\\model\\Rakuten_model_v{}".format(new_version))
+    if os.path.exists(my_path + "versions\\model\\Rakuten_model_v{}".format(new_version)):
+        shutil.rmtree(my_path + "versions\\model\\Rakuten_model_v{}".format(new_version))
 
 #--------------------------------------------------------------------------------------------------------------------

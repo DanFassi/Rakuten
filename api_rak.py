@@ -65,7 +65,7 @@ current_role = "user"
 async def create_user(request: Request):
     form_data = await request.form()
     username = form_data["username"]
-    password = form_data["password"]   
+    password = form_data["password"] 
     user =  {"name" : username,
             "password" : password,
             "role" : "user"
@@ -74,7 +74,7 @@ async def create_user(request: Request):
     created_user = request.app.database[collection].find_one(
         {"_id": new_user.inserted_id}
     )
-    popup_message = "Nouvel utilisateur créée. Vous allez être redirigé vers la page d'accueil dans 2 secondes"
+    popup_message = "Nouvel utilisateur créée. Vous allez être redirigé vers la homepage dans 2 secondes"
 
     # Render the pop-up message template
     return templates.TemplateResponse(
@@ -226,6 +226,6 @@ def update_user(username: str, request: Request, user: User= Body(...)):
 
 
 
-app.include_router(router, tags=["users"], prefix="/user")
+app.include_router(router, tags=["user"], prefix="/user")
 app.include_router(router2, tags=["admin"], prefix="/admin")
 app.include_router(router3, tags=["Interface"])

@@ -3,13 +3,21 @@ from httpx import AsyncClient
 from fastapi import FastAPI
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
 from api_rak import app  
+import os
 
 @pytest.fixture
 def client():
     """
     Create a test client using the FastAPI app
     """
-    with AsyncClient(app=app, base_url="http://testserver") as client:
+    with AsyncClient(app=app, base_url="http://localhost:8000", headers={"Authorization": [os.environ["MONGODB_LOG"],
+                                                                                           os.environ["MONGODB_PW"],
+                                                                                           os.environ["MONGODB_DB_NAME"],
+                                                                                           os.environ["MONGODB_DB_COL_USERS"],
+                                                                                           os.environ["MONGODB_DB_COL_LOGS"] 
+                                                                                           ]
+                                                                        }
+                    ) as client:
         yield client
 
 @pytest.mark.asyncio
@@ -22,7 +30,7 @@ async def test_create_user(client):
 
     # Verify the response
     assert response.status_code == HTTP_201_CREATED
-    assert "Nouvel utilisateur créé" in response.text
+    assert "Nouvel utilisateur créée" in response.text
 
 @pytest.mark.asyncio
 async def test_predict(client):

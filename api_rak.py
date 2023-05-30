@@ -74,7 +74,7 @@ async def create_user(request: Request):
     created_user = request.app.database[collection].find_one(
         {"_id": new_user.inserted_id}
     )
-    popup_message = "Nouvel utilisateur créé. Vous allez être redirigé vers la page d'accueil dans 2 secondes"
+    popup_message = "Nouvel utilisateur créée. Vous allez être redirigé vers la page d'accueil dans 2 secondes"
 
     # Render the pop-up message template
     return templates.TemplateResponse(

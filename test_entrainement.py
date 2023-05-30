@@ -10,8 +10,8 @@ import shutil
 ##############################################################################################################################
 
 #importation d'une partie du dataframe pour effectier un test rapide
-df = pd.read_csv("X.csv", skipfooter= 84000)
-y = pd.read_csv("Y.csv", index_col = 0, skipfooter= 84000)
+df = pd.read_csv("X.csv", skipfooter= 84000, engine = 'python')
+y = pd.read_csv("Y.csv", index_col = 0, skipfooter= 84000, engine = 'python')
 
 #processing des features et des targets
 X2, vectorizer =  dataframe_processing(df)

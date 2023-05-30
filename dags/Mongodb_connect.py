@@ -13,7 +13,7 @@ else:
 
 def mongo_trigger():
     #recuperation des variables d'environnements
-    trigger = os.getenv("TRAINING_TRIGGER")
+    trigger = int(os.getenv("TRAINING_TRIGGER"))
     DB_NAME= os.getenv("MONGODB_DB_NAME")
     logs = os.getenv("MONGODB_DB_COL_LOGS")
 
@@ -35,7 +35,7 @@ def mongo_trigger():
     validated_df = validated_df.drop_duplicates(["designation","description","prediction"])
     
     nb_yes = len(validated_df)    
-    if nb_yes % trigger ==0 :
+    if nb_yes % trigger == 0 :
         return True
     else:
         return False

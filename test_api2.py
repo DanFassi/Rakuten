@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 from fastapi.testclient import TestClient
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND

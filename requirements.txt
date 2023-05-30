@@ -10,3 +10,4 @@ scikit-learn
 pytest
 passlib
 jinja2
+pandas

@@ -6,17 +6,20 @@ from api_rak import app
 import os
 
 @pytest.fixture
-def client():
-    """
-    Create a test client using the FastAPI app
-    """
-    with AsyncClient(app=app, base_url="http://localhost:8000", headers={"MONGODB_LOG": os.environ.get("MONGODB_LOG"),
-                                                                         "MONGODB_PW":  os.environ.get("MONGODB_PW"),
-                                                                         "MONGODB_DB_NAME": os.environ.get("MONGODB_DB_NAME"),
-                                                                         "MONGODB_DB_COL_USERS" : os.environ.get("MONGODB_DB_COL_USERS"),
-                                                                         "MONGODB_DB_COL_LOGS": os.environ.get("MONGODB_DB_COL_LOGS")            
-                                                                        }
-                    ) as client:
+def client(monkeypatch):
+    monkeypatch.setenv("MONGODB_LOG", os.environ.get("MONGODB_LOG"))
+    monkeypatch.setenv("MONGODB_PW",  os.environ.get("MONGODB_PW"))
+    monkeypatch.setenv("MONGODB_DB_NAME", os.environ.get("MONGODB_DB_NAME"))
+    monkeypatch.setenv("MONGODB_DB_COL_USERS" , os.environ.get("MONGODB_DB_COL_USERS"))
+    monkeypatch.setenv("MONGODB_DB_COL_LOGS", os.environ.get("MONGODB_DB_COL_LOGS"))
+
+   # with AsyncClient(app=app, base_url="http://localhost:8000", headers={"MONGODB_LOG": os.environ.get("MONGODB_LOG"),
+   #                                                                      "MONGODB_PW":  os.environ.get("MONGODB_PW"),
+   #                                                                      "MONGODB_DB_NAME": os.environ.get("MONGODB_DB_NAME"),
+   #                                                                      "MONGODB_DB_COL_USERS" : os.environ.get("MONGODB_DB_COL_USERS"),
+   #                                                                      "MONGODB_DB_COL_LOGS": os.environ.get("MONGODB_DB_COL_LOGS")            
+   #                                                                     }
+    with AsyncClient(app) as client:
         yield client
 
 @pytest.mark.asyncio

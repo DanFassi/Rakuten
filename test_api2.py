@@ -6,9 +6,9 @@ from api_rak import app
 
 address= "localhost:8000"
 
-session = requests.Session()
-session.auth = (os.getenv("TEST_LOG"), os.getenv("TEST_PW"))
-auth = session.post('http://' + address)
+#session = requests.Session()
+#session.auth = (os.getenv("TEST_LOG"), os.getenv("TEST_PW"))
+#auth = session.post('http://' + address)
 
 def client():
     """

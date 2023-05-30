@@ -30,7 +30,7 @@ jobs:
         python3 -m nltk.downloader stopwords
     - name: launch API
       run: uvicorn api_rak:app --port 8000 --reload --host 0.0.0.0 &
-      env: |
+      env: 
         MONGODB_LOG: ${{ secrets.MONGODB_LOG }}
         MONGODB_PW: ${{ secrets.MONGODB_PW }}
         MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}

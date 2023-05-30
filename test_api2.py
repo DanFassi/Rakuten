@@ -10,12 +10,12 @@ def client():
     """
     Create a test client using the FastAPI app
     """
-    with AsyncClient(app=app, base_url="http://localhost:8000", headers={"Authorization": [os.environ["MONGODB_LOG"],
-                                                                                           os.environ["MONGODB_PW"],
-                                                                                           os.environ["MONGODB_DB_NAME"],
-                                                                                           os.environ["MONGODB_DB_COL_USERS"],
-                                                                                           os.environ["MONGODB_DB_COL_LOGS"] 
-                                                                                           ]
+    with AsyncClient(app=app, base_url="http://localhost:8000", headers={"MONGODB_LOG": os.environ["MONGODB_LOG"],
+                                                                         "MONGODB_PW":  os.environ["MONGODB_PW"],
+                                                                         "MONGODB_DB_NAME": os.environ["MONGODB_DB_NAME"],
+                                                                         "MONGODB_DB_COL_USERS" : os.environ["MONGODB_DB_COL_USERS"],
+                                                                         "MONGODB_DB_COL_LOGS": os.environ["MONGODB_DB_COL_LOGS"] 
+                                                                                           
                                                                         }
                     ) as client:
         yield client

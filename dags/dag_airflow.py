@@ -16,7 +16,7 @@ else:
 def modelisation():
     #index_col = 0 supprimer de X_df. L'ecriture de nouvelles données dans la BDD se faisant sans index
     X_df = pd.read_csv(my_path+"X.csv")
-    y_df = pd.read_csv(my_path+"y.csv",index_col = 0)
+    y_df = pd.read_csv(my_path+"Y.csv",index_col = 0)
     X, vectorizer = dataframe_processing(X_df)
     y, le = target_processing(y_df)
     model , history = MLmodel(X,y)

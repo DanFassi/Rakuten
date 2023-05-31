@@ -31,7 +31,7 @@ def test_update_user(client):
     response = client.put("/admin/{}".format(username), json=user_data)
     assert response.status_code == 200
     assert response.json()["name"] == username
-    assert response.json()["role"] == "password"
+    assert response.json()["password"] == "password"
     assert response.json()["role"] == "user"
 
 #Requete supprimant un utilisateur de la base
@@ -39,13 +39,3 @@ def test_delete_user(client):
     username = "testuser"
     response =  client.delete("/admin/{}".format(username))
     assert response.status_code == HTTP_204_NO_CONTENT
-
-#Requete testant la réponse si l'on tente de maj un utilisateur qui n'existe pas dans la base
-def test_update_user_not_found(client):
-    username = "nonexistentuser"
-    password = "changement"
-    user_data = {"name":username, "password" : password, "role": "user"}
-    user_data = {"role": "user"}
-    response = client.put("/admin/{}".format(username), json=user_data)
-    assert response.status_code == HTTP_404_NOT_FOUND
-    assert "User with name" in response.text

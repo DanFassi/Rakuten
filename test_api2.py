@@ -31,7 +31,7 @@ def test_update_user(client):
     response = client.put("/admin/{}".format(username), json=user_data)
     assert response.status_code == 200
     assert response.json()["name"] == username
-    assert response.json()["password"] == "password"
+    assert response.json()["password"] == "changement"
     assert response.json()["role"] == "user"
 
 #Requete supprimant un utilisateur de la base

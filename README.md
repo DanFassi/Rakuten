@@ -1,5 +1,14 @@
-# Rakuten
-Rakuten Challenge
+# Présentation du projet
+Dans le cadre de ma formation MLops, j'ai du réaliser un projet ayant pour thème la classification de produits de e-commerce, basé sur le challenge **Rakuten France Multimodal Product Data Classification**.
+Plus d'informations sur la nature de ce challenge [ici](https://challengedata.ens.fr/challenges/35)
+
+Les objectifs de ce projet étaient les suivants:
+- Créer un modèle permettant la prédiction d'une catégorie de produit basé sur leur designation et leur description. (données textuelles)
+- Créer une base de données utilisateur et une base de donnée logs (technologie choisie : MONGODB)
+- Mettre en place une API sécurisée avec identification de l'utilisateur, permettant de requeter le modèle en place.
+- Mettre en place un pipeline CI/CD avec réentrainement du modèle via AIRFLOW
+- Containeriser L'API et AIRFLOW via DOCKER
+- Créer une interface web permettant un accès simple et intuitif au modèle.
 
 ## Contenu du repo
 Ce repo contient l'ensemble des fichiers et dossiers nécessaires pour:

@@ -1,4 +1,6 @@
-# Présentation du projet
+# RAKUTEN CHALLENGE
+
+## Présentation du projet
 Dans le cadre de ma formation MLops, j'ai du réaliser un projet ayant pour thème la classification de produits de e-commerce, basé sur le challenge **Rakuten France Multimodal Product Data Classification**.
 Plus d'informations sur la nature de ce challenge [ici](https://challengedata.ens.fr/challenges/35)
 
